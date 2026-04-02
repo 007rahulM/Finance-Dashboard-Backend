@@ -3,12 +3,12 @@ require("dotenv").config();
 const express=require("express");
 const cors=require("cors");
 const rateLimit=require("express-rate-limit");
-// const connectDB=require("./config/db");
+const connectDB=require("./src/config/db");
 
 const app=express();
 
 //connec to database
-// connectDB();
+connectDB();
 
 //cors() for allowing the API to accept requests from browsers and other endpoints
 
