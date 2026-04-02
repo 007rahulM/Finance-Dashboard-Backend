@@ -18,9 +18,9 @@ app.use(express.json()); //for parsing JSON request bodies
 
 
 //use api routes
-// app.use("api/auth",authLimiter,authRoutes);
-// app.use("/api/users",userRoutes);
-// app.use("/api/records",recordRoutes);
+app.use("api/auth",authLimiter,authRoutes);
+app.use("/api/users",userRoutes);
+app.use("/api/records",recordRoutes);
 
 //global error handling 
 app.use((err,req,res,next)=>{
