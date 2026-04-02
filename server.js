@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json()); //for parsing JSON request bodies
 
 
-// //use api
+//use api
 // app.use("api/auth",authLimiter,authRoutes);
 // app.use("/api/users",userRoutes);
 // app.use("/api/records",recordRoutes);
