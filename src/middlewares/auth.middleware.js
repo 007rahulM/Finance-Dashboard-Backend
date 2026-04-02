@@ -1,36 +1,39 @@
-const jwt=require("jsonwebtoken");
-const User=require("../models/user.model");
+const jwt = require('jsonwebtoken');
 
-const verifytoken=(req,res,next)=>{
-    const authHeader=req.headers.authorization;
-    if(!authHeader || !authHeader.startsWith("Bearer")){
-        return res.status(401).json({success:false,message:"Access denied No token provided"});
-        
-    }
+/**
+ * Middleware to verify the JWT token
+ */
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
 
-    const token=authHeader.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Access denied. No token provided.' });
+  }
 
-    try{
-        const decoded=jwt.verify(token,process.env.JWT_SECRET);
-        req.user=decoded;
-        next();
-    }catch(err){
-        return res.status(401).json({
-            success:false,messgae:"Invalid or expired token"
-        });
-    }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // Adds user info (id, email, role) to the request object
+    next();
+  } catch (error) {
+    return res.status(401).json({ success: false, message: 'Invalid or expired token.' });
+  }
 };
 
-const authorizeRoles=(...roles)=>{
-    return(req,res,next)=>{
-        if(!req.user || !roles.includes(req.user.roles)){
-            return res.status(403).json({
-                success:false,
-                message:`Access denied Required role(s):${roles.join(', ')}.`,
-
-            });
-        }next();
-    };
+/**
+ * Middleware to restrict access based on user roles
+ */
+const authorizeRoles = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (!allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: `Role (${req.user.role}) is not allowed to access this resource.`,
+      });
+    }
+    next();
+  };
 };
 
-module.exports={verifytoken,authorizeRoles};
+// This was the line causing your error — names must match the functions above
+module.exports = { verifyToken, authorizeRoles };
