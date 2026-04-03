@@ -103,7 +103,7 @@ Body:
 }
 ```
 
-<!-- Screenshot: Test 1 result -->
+![Test 1 — Register Admin (201 Created)](images/test-01-register-admin.png)
 
 ---
 
@@ -124,7 +124,7 @@ Body:
 
 **Expected:** `201 Created` with Analyst user data.
 
-<!-- Screenshot: Test 2 result -->
+![Test 2 — Register Analyst (201 Created)](images/test-02-register-analyst.png)
 
 ---
 
@@ -144,7 +144,7 @@ Body:
 
 No `role` needed — defaults to `Viewer`.
 
-<!-- Screenshot: Test 3 result -->
+![Test 3 — Register Viewer (201 Created)](images/test-03-register-viewer.png)
 
 ---
 
@@ -179,7 +179,7 @@ Body:
 
 > 🔑 **IMPORTANT:** Copy the `token` value. You'll use it as `<ADMIN_TOKEN>` in all subsequent requests.
 
-<!-- Screenshot: Test 4 result -->
+![Test 4 — Login as Admin (200 OK + JWT token)](images/test-04-login-admin.png)
 
 ---
 
@@ -193,7 +193,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected (200 OK):** Your user object without the password field.
 
-<!-- Screenshot: Test 5 result -->
+![Test 5 — Get Profile (200 OK)](images/test-05-get-profile.png)
 
 ---
 
@@ -213,7 +213,7 @@ URL:      http://localhost:5000/api/auth/profile
 }
 ```
 
-<!-- Screenshot: Test 6 result -->
+![Test 6 — No Token (401 Unauthorized)](images/test-06-no-token-401.png)
 
 ---
 
@@ -256,7 +256,7 @@ Body:
 
 > 📝 **Copy the `_id`** of this record. You'll need it for the next tests.
 
-<!-- Screenshot: Test 7 result -->
+![Test 7 — Create Financial Record (201 Created)](images/test-07-create-record.png)
 
 ---
 
@@ -270,7 +270,7 @@ Create these records one by one (same method and headers as Test 7):
 { "title": "Restaurant", "amount": 120, "type": "expense", "category": "Food", "date": "2024-06-12" }
 ```
 
-<!-- Screenshot: Test 8 results -->
+![Test 8 — Create 4 More Records (201 Created each)](images/test-08-create-more-records.png)
 
 ---
 
@@ -284,7 +284,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected (200 OK):** List of all records with pagination info.
 
-<!-- Screenshot: Test 9 result -->
+![Test 9 — Get All Records (200 OK + pagination)](images/test-09-get-all-records.png)
 
 ---
 
@@ -297,7 +297,7 @@ Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected:** Only expense records.
 
-<!-- Screenshot: Test 10 result -->
+![Test 10 — Filter by Type=expense (200 OK)](images/test-10-filter-by-type.png)
 
 ---
 
@@ -310,7 +310,7 @@ Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected:** Only records with dates between June 1–5.
 
-<!-- Screenshot: Test 11 result -->
+![Test 11 — Filter by Date Range (200 OK)](images/test-11-filter-by-date.png)
 
 ---
 
@@ -324,7 +324,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 
 Replace `<RECORD_ID>` with the `_id` you copied in Test 7.
 
-<!-- Screenshot: Test 12 result -->
+![Test 12 — Get Single Record by ID (200 OK)](images/test-12-get-single-record.png)
 
 ---
 
@@ -348,7 +348,7 @@ Body:
 
 **Expected (200 OK):** The updated record.
 
-<!-- Screenshot: Test 13 result -->
+![Test 13 — Update Record (200 OK)](images/test-13-update-record.png)
 
 ---
 
@@ -382,7 +382,7 @@ Content-Type: application/json
 }
 ```
 
-<!-- Screenshot: Test 14 result -->
+![Test 14 — Viewer Cannot Create Records (403 Forbidden)](images/test-14-viewer-forbidden-403.png)
 
 ---
 
@@ -408,7 +408,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 }
 ```
 
-<!-- Screenshot: Test 15 result -->
+![Test 15 — Dashboard Summary (200 OK)](images/test-15-dashboard-summary.png)
 
 ---
 
@@ -419,7 +419,7 @@ GET http://localhost:5000/api/summary/trends?year=2024
 Authorization: Bearer <ADMIN_TOKEN>
 ```
 
-<!-- Screenshot: Test 16 result -->
+![Test 16 — Monthly Trends (200 OK)](images/test-16-monthly-trends.png)
 
 ---
 
@@ -442,7 +442,7 @@ GET http://localhost:5000/api/records/<RECORD_ID>
 ```
 **Expected:** `404 Record not found.` (soft delete worked!)
 
-<!-- Screenshot: Test 17 results -->
+![Test 17 — Delete Record (200 OK) + 404 Verify Soft Delete](images/test-17-delete-record.png)
 
 ---
 
@@ -474,7 +474,7 @@ Content-Type: application/json
 }
 ```
 
-<!-- Screenshot: Test 18 result -->
+![Test 18 — Validation Error (400 Bad Request)](images/test-18-validation-error.png)
 
 ---
 
@@ -485,7 +485,7 @@ GET http://localhost:5000/api/users
 Authorization: Bearer <ADMIN_TOKEN>
 ```
 
-<!-- Screenshot: Test 19 result -->
+![Test 19 — Admin Lists All Users (200 OK)](images/test-19-list-users-admin.png)
 
 ---
 
@@ -499,7 +499,7 @@ Authorization: Bearer <ANALYST_TOKEN>
 
 **Expected:** `403 Forbidden`
 
-<!-- Screenshot: Test 20 result -->
+![Test 20 — Analyst Cannot Access User List (403 Forbidden)](images/test-20-analyst-forbidden-403.png)
 
 ---
 
