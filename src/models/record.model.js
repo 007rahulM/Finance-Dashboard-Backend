@@ -1,53 +1,50 @@
-const mongoose=require("mongoose");
-const financialRecordSchema=new mongoose.Schema({
-    title:{
-        type:String,
-        required:[true,"Title is required"],
-        trim:true,
 
-    },
-    amount:{
-        type:Number,
-        required:[true,"Amount is required"],
-        min:[0,"Amount cannot be negative"],
-    },
-    type:{
-        type:String,
-        enum:["Income","Expense"],
-        required:[true,"Type is required"],
+const mongoose = require('mongoose');
 
+const financialRecordSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, 'Title is required'],
+      trim: true,
     },
-
-    category:{
-        type:String,
-        required:[true,"Category is required"],
-        trim:true,
-        enum:["Salary","Rent","Food","Investment","Other"],
-
+    amount: {
+      type: Number,
+      required: [true, 'Amount is required'],
+      min: [0, 'Amount cannot be negative'],
     },
-    date:{
-        type:Date,
-        required:[true,"Date is required"],
-        default:Date.now,
+    type: {
+      type: String,
+      enum: ['income', 'expense'],
+      required: [true, 'Type is required'],
     },
-    notes:{
-        type:String,
-        trim:true,
-        maxlenght:[500,"Notes cannot exceed 500 characters"],
-
+    category: {
+      type: String,
+      required: [true, 'Category is required'],
+      trim: true,
+      enum: ['Salary', 'Rent', 'Food', 'Investment', 'Other'],
     },
-    createdBy:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required:[true,"CreatedBy is required"],
-
+    date: {
+      type: Date,
+      required: [true, 'Date is required'],
+      default: Date.now,
     },
-    isDeleted:{
-        type:Boolean,
-        default:false,
-
+    notes: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'Notes cannot exceed 500 characters'],
     },
-},{timestamps:true}
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'Creator is required'],
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
 );
 
-module.exports=mongoose.model("FinancialRecord",financialRecordSchema);
+module.exports = mongoose.model('FinancialRecord', financialRecordSchema);
