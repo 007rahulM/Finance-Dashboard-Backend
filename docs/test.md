@@ -1,18 +1,5 @@
-# Step 8 — Testing Your API
+# Testing Your API
 
-> **You are learning:** How to use Thunder Client (VS Code extension) or Postman to test every endpoint you've built, what to look for in responses, and how to walk through a complete test scenario.
-
----
-
-## 🧠 Why Test With a Client Tool?
-
-Since this is a backend-only project (no frontend), we need a way to manually send HTTP requests to the server. Tools like **Postman** and **Thunder Client** let you:
-- Choose the HTTP method (GET, POST, PUT, DELETE)
-- Set request headers (like `Authorization: Bearer <token>`)
-- Send a JSON body
-- See the response code and body
-
----
 
 ## 🛠 Setting Up
 
@@ -531,10 +518,3 @@ Authorization: Bearer <ANALYST_TOKEN>
 
 ---
 
-## ✅ What You Learned in This Step
-
-- [x] How to set up Thunder Client or Postman
-- [x] How to send requests with tokens in the Authorization header
-- [x] How to test every type of endpoint: auth, CRUD, analytics
-- [x] How to verify access control is working
-- [x] How to confirm validation is rejecting bad input
