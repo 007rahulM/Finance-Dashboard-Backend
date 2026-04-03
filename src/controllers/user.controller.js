@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const User = require('../models/user.model');
 
 const getAllUsers = async (req, res) => {
@@ -29,6 +30,9 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ success: false, message: 'Invalid user ID.' });
+    }
     const user = await User.findById(req.params.id).select('-password');
     if (!user) {
       return res
@@ -43,6 +47,9 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ success: false, message: 'Invalid user ID.' });
+    }
     const { username, email, role, isActive } = req.body;
     const targetId = req.params.id;
 
@@ -82,6 +89,9 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ success: false, message: 'Invalid user ID.' });
+    }
     if (req.params.id === req.user.id) {
       return res
         .status(403)
