@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit');
 const connectDB = require('./src/config/db');
 
 const authRoutes = require('./src/routes/auth.routes');
-const userRoutes = require('./src/routes/user.rotues'); // Ensure this filename is correct
+const userRoutes = require('./src/routes/user.routes');
 const recordRoutes = require('./src/routes/record.routes');
 const app = express();
 
