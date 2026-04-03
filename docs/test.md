@@ -490,26 +490,26 @@ Authorization: Bearer <ANALYST_TOKEN>
 
 | # | Endpoint | Expected Status | Pass? |
 |---|---|---|---|
-| 1 | POST /api/auth/register (Admin) | 201 | |
-| 2 | POST /api/auth/register (Analyst) | 201 | |
-| 3 | POST /api/auth/register (Viewer) | 201 | |
-| 4 | POST /api/auth/login | 200 + token | |
-| 5 | GET /api/auth/profile | 200 | |
-| 6 | GET /api/auth/profile (no token) | 401 | |
-| 7 | POST /api/records | 201 | |
-| 8 | Create 4 more records | 201 × 4 | |
-| 9 | GET /api/records | 200 + pagination | |
-| 10 | GET /api/records?type=expense | 200, filtered | |
-| 11 | GET /api/records with date range | 200, filtered | |
-| 12 | GET /api/records/:id | 200 | |
-| 13 | PUT /api/records/:id | 200, updated | |
-| 14 | POST /api/records (Viewer) | 403 | |
-| 15 | GET /api/summary/dashboard | 200 | |
-| 16 | GET /api/summary/trends | 200 | |
-| 17 | DELETE /api/records/:id | 200 | |
-| 18 | POST invalid record | 400 + errors | |
-| 19 | GET /api/users (Admin) | 200 + list | |
-| 20 | GET /api/users (Analyst) | 403 | |
+| 1 | POST /api/auth/register (Admin) | 201 | ✅|
+| 2 | POST /api/auth/register (Analyst) | 201 |✅ |
+| 3 | POST /api/auth/register (Viewer) | 201 |✅ |
+| 4 | POST /api/auth/login | 200 + token | ✅|
+| 5 | GET /api/auth/profile | 200 | ✅|
+| 6 | GET /api/auth/profile (no token) | 401 |✅ |
+| 7 | POST /api/records | 201 | ✅|
+| 8 | Create 4 more records | 201 × 4 |✅ |
+| 9 | GET /api/records | 200 + pagination | ✅|
+| 10 | GET /api/records?type=expense | 200, filtered |✅ |
+| 11 | GET /api/records with date range | 200, filtered | ✅|
+| 12 | GET /api/records/:id | 200 | ✅|
+| 13 | PUT /api/records/:id | 200, updated |✅ |
+| 14 | POST /api/records (Viewer) | 403 |✅ |
+| 15 | GET /api/summary/dashboard | 200 | ✅|
+| 16 | GET /api/summary/trends | 200 |✅ |
+| 17 | DELETE /api/records/:id | 200 | ✅|
+| 18 | POST invalid record | 400 + errors |✅ |
+| 19 | GET /api/users (Admin) | 200 + list |✅ |
+| 20 | GET /api/users (Analyst) | 403 |✅ |
 
 ---
 
