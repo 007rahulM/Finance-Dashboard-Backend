@@ -90,7 +90,7 @@ Body:
 }
 ```
 
-![Test 1 — Register Admin (201 Created)](<images/register  success screenshoot .png>)
+![Test 1 — Register Admin (201 Created)](images/register-success-screenshot.png)
 
 ---
 
@@ -111,7 +111,7 @@ Body:
 
 **Expected:** `201 Created` with Analyst user data.
 
-![Test 2 — Register Analyst (201 Created)](<images/register as analyisst and there succes image.png>)
+![Test 2 — Register Analyst (201 Created)](images/register-analyst-success.png)
 
 ---
 
@@ -132,7 +132,7 @@ Body:
 No `role` needed — defaults to `Viewer`.
 
 **Expected:** `201 Created` with Viewer user data.
-![Test 3 — Register Viewer Successfully](<images/reigstere viewer successfully .png>)
+![Test 3 — Register Viewer Successfully](images/register-viewer-success.png)
 
 ---
 
@@ -167,7 +167,7 @@ Body:
 
 > 🔑 **IMPORTANT:** Copy the `token` value. You'll use it as `<ADMIN_TOKEN>` in all subsequent requests.
 
-![Test 4 — Login as Admin (200 OK + JWT token)](<images/login as admin.png>)
+![Test 4 — Login as Admin (200 OK + JWT token)](images/login-as-admin.png)
 
 ---
 
@@ -181,7 +181,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected (200 OK):** Your user object without the password field.
 
-![Test 5 — Get Profile (200 OK)](<images/try to get profile with token .png>)
+![Test 5 — Get Profile (200 OK)](images/get-profile-with-token.png)
 
 ---
 
@@ -201,7 +201,7 @@ URL:      http://localhost:5000/api/auth/profile
 }
 ```
 
-![Test 6 — No Token (401 Unauthorized)](<images/try to get profile without token.png>)
+![Test 6 — No Token (401 Unauthorized)](images/get-profile-without-token.png)
 
 ---
 
@@ -244,7 +244,7 @@ Body:
 
 > 📝 **Copy the `_id`** of this record. You'll need it for the next tests.
 
-![Test 7 — Create Financial Record (201 Created)](<images/creating a financial record as admin .png>)
+![Test 7 — Create Financial Record (201 Created)](images/creating-a-financial-record-as-admin.png)
 
 ---
 
@@ -268,7 +268,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected (200 OK):** List of all records with pagination info.
 
-![Test 9 — Get All Records (200 OK + pagination)](<images/accessing all records .png>)
+![Test 9 — Get All Records (200 OK + pagination)](images/accessing-all-records.png)
 
 ---
 
@@ -281,7 +281,7 @@ Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected:** Only expense records.
 
-![Test 10 — Filter by Type=expense (200 OK)](<images/accessing reocrds filtering with only expense.png>)
+![Test 10 — Filter by Type=expense (200 OK)](images/accessing-records-filtering-by-expense-type.png)
 
 ---
 
@@ -294,7 +294,7 @@ Authorization: Bearer <ADMIN_TOKEN>
 
 **Expected:** Only records with dates between June 1–5.
 
-![Test 11 — Filter by Date Range (200 OK)](<images/accessing records filtering by dates start and end date.png>)
+![Test 11 — Filter by Date Range (200 OK)](images/accessing-records-filtering-by-date-range.png)
 
 
 ---
@@ -309,7 +309,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 
 Replace `<RECORD_ID>` with the `_id` you copied in Test 7.
 
-![Test 12 — Get Single Record by ID (200 OK)](<images/accessing a single record with record id .png>)
+![Test 12 — Get Single Record by ID (200 OK)](images/accessing-a-single-record-by-id.png)
 
 ---
 
@@ -333,7 +333,7 @@ Body:
 
 **Expected (200 OK):** The updated record.
 
-![Test 13 — Update Record (200 OK)](<images/updating the records with record id with role as admin .png>)
+![Test 13 — Update Record (200 OK)](images/updating-a-record-as-admin.png)
 ---
 
 ### ✅ Test 14: Viewer Cannot Create Records (expect 403)
@@ -366,7 +366,7 @@ Content-Type: application/json
 }
 ```
 
-![Test 14 — Viewer Cannot Create Records (403 Forbidden)](<images/viewers cannot create the record .png>)
+![Test 14 — Viewer Cannot Create Records (403 Forbidden)](images/viewer-cannot-create-record.png)
 
 ---
 
@@ -392,7 +392,7 @@ Headers:  Authorization: Bearer <ADMIN_TOKEN>
 }
 ```
 
-![Test 15 — Dashboard Summary (200 OK)](<images/dashboard summary  with admin credentials.png>)
+![Test 15 — Dashboard Summary (200 OK)](images/dashboard-summary-with-admin-credentials.png)
 
 ---
 
@@ -403,7 +403,7 @@ GET http://localhost:5000/api/summary/trends?year=2024
 Authorization: Bearer <ADMIN_TOKEN>
 ```
 
-![Test 16 — Monthly Trends (200 OK)](<images/monthly trends.png>)
+![Test 16 — Monthly Trends (200 OK)](images/monthly-trends.png)
 
 ---
 
@@ -457,7 +457,7 @@ Content-Type: application/json
 }
 ```
 
-![Test 18 — Validation Error (400 Bad Request)](<images/trying to send invalid data to post a record and checking its validtion.png>)
+![Test 18 — Validation Error (400 Bad Request)](images/validation-error-invalid-record-data.png)
 
 ---
 
@@ -468,7 +468,7 @@ GET http://localhost:5000/api/users
 Authorization: Bearer <ADMIN_TOKEN>
 ```
 
-![Test 19 — Admin Lists All Users (200 OK)](<images/list all user with admin creditials .png>)
+![Test 19 — Admin Lists All Users (200 OK)](images/list-all-users-with-admin-credentials.png)
 
 ---
 
@@ -482,7 +482,7 @@ Authorization: Bearer <ANALYST_TOKEN>
 
 **Expected:** `403 Forbidden`
 
-![Test 20 — Analyst Cannot Access User List (403 Forbidden)](<images/accessing all users with analyst credentials .png>)
+![Test 20 — Analyst Cannot Access User List (403 Forbidden)](images/accessing-all-users-with-analyst-credentials.png)
 
 ---
 
