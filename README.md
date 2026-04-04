@@ -32,6 +32,7 @@
 10. [Data Models](#data-models)
 11. [Design Decisions & Assumptions](#design-decisions--assumptions)
 12. [Testing Guide](#testing-guide)
+13. [Live API Deployment](#-live-api-deployment)
 
 ---
 
@@ -567,3 +568,22 @@ It covers:
 - Testing every CRUD, filter, analytics, and access-control scenario
 - A checklist table to track your test results
 - Screenshots for every endpoint
+
+
+## Live API Deployment
+
+[![Live  API](https://dev-badge-phi.vercel.app/api/index?text=Live%20%20API&color1=0071eb&color2=fd5353)](https://finance-dashboard-backend-raea.onrender.com)
+
+This API is fully tested and deployed on Render:
+
+Live API URL: https://finance-dashboard-backend-raea.onrender.com
+
+Testing the Live API
+To test the live deployed API, use Postman or Thunder Client:
+
+All endpoints follow the same structure as documented above
+Authentication required — You must register and get a JWT token first
+Replace http://localhost:5000 with https://finance-dashboard-backend-raea.onrender.com in your requests
+Refer to the Testing Guide for complete step-by-step instructions
+All manual testing has been verified against the deployed instance ✅
+
