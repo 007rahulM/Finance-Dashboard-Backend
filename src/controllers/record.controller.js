@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const FinancialRecord = require('../models/record.model');
 
 const createRecord = async (req, res) => {
@@ -59,6 +60,9 @@ const getAllRecords = async (req, res) => {
 
 const getRecordById = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ success: false, message: 'Invalid record ID.' });
+    }
     const record = await FinancialRecord.findOne({
       _id: String(req.params.id),
       isDeleted: false,
@@ -77,6 +81,9 @@ const getRecordById = async (req, res) => {
 
 const updateRecord = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ success: false, message: 'Invalid record ID.' });
+    }
     const { title, amount, type, category, date, notes } = req.body;
     const updateFields = {
       title: title !== undefined ? String(title) : undefined,
@@ -110,6 +117,9 @@ const updateRecord = async (req, res) => {
 
 const deleteRecord = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ success: false, message: 'Invalid record ID.' });
+    }
     const record = await FinancialRecord.findOneAndUpdate(
       { _id: req.params.id, isDeleted: false },
       { isDeleted: true },
