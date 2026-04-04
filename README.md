@@ -2,6 +2,7 @@
 
 # 💰 Finance Dashboard Backend
 
+
 **A production-ready REST API for financial record management with role-based access control**
 
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -571,9 +572,9 @@ It covers:
 
 
 ## Live API Deployment
-<div align="center">
+
 [![Live  API](https://dev-badge-phi.vercel.app/api/index?text=Live%20%20API&color1=0071eb&color2=fd5353)](https://finance-dashboard-backend-raea.onrender.com)
-</div>
+
 
 This API is fully tested and deployed on Render:
 
