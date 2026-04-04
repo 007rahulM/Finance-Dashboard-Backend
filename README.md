@@ -586,6 +586,8 @@ To test the live deployed API, use Postman or Thunder Client:
 All endpoints follow the same structure as documented above
 Authentication required — You must register and get a JWT token first
 Replace http://localhost:5000 with https://finance-dashboard-backend-raea.onrender.com in your requests
+
 Refer to the Testing Guide for complete step-by-step instructions
+
 All manual testing has been verified against the deployed instance ✅
 
