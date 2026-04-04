@@ -571,8 +571,9 @@ It covers:
 
 
 ## Live API Deployment
-
+<div align="center">
 [![Live  API](https://dev-badge-phi.vercel.app/api/index?text=Live%20%20API&color1=0071eb&color2=fd5353)](https://finance-dashboard-backend-raea.onrender.com)
+</div>
 
 This API is fully tested and deployed on Render:
 
