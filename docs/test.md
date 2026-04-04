@@ -52,6 +52,10 @@ MongoDB Connected: localhost
 Server running on port 5000 in development mode
 ```
 
+## Base URL Section 
+Local development: http://localhost:5000
+Live deployment: https://finance-dashboard-backend-raea.onrender.com
+
 ---
 
 ## 📋 Complete Test Walkthrough
