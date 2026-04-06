@@ -86,14 +86,20 @@ function generateEndpointsSection() {
     users: [],
   };
 
-  // Helper: check if a route method+path combination exists in source (handles multi-line patterns)
-  function routeExists(source, pathPattern) {
-    // Normalize source by collapsing whitespace between the method call and the path
-    const normalized = source.replace(/\(\s*\n\s*/g, '(');
-    const single = pathPattern;
-    const double = pathPattern.replace(/'/g, '"');
-    return normalized.includes(single) || normalized.includes(double);
+  // Helper: check if a route method+path combination exists in a pre-normalized source
+  // Call normalizeSource() once on the source before passing to routeExists.
+  function normalizeSource(source) {
+    // Collapse whitespace between opening paren and the path argument (handles multi-line routes)
+    return source.replace(/\(\s*\n\s*/g, '(');
   }
+  function routeExists(normalizedSource, pathPattern) {
+    const double = pathPattern.replace(/'/g, '"');
+    return normalizedSource.includes(pathPattern) || normalizedSource.includes(double);
+  }
+
+  // Pre-normalize sources once before any loop
+  const authRoutesNorm = normalizeSource(authRoutes);
+  const recordRoutesNormLC = normalizeSource(recordRoutes).toLowerCase();
 
   // Parse auth routes
   const authRouteDefs = [
@@ -102,21 +108,21 @@ function generateEndpointsSection() {
     { pattern: "router.get('/profile'",   row: '| GET | `/api/auth/profile` | `auth.routes.js` | `auth.controller.js → getProfile()` | ✅ JWT | Any authenticated |' },
   ];
   for (const def of authRouteDefs) {
-    if (routeExists(authRoutes, def.pattern)) {
+    if (routeExists(authRoutesNorm, def.pattern)) {
       rows.auth.push(def.row);
     }
   }
 
-  // Parse record routes
+  // Parse record routes — paths stored in lowercase to match the pre-lowercased source
   const recordMethodMap = [
-    { method: 'post', path: "router.post('/'", endpoint: '`/api/records`', ctrl: '`record.controller.js → createRecord()`', auth: '✅ JWT', roles: 'Admin, Analyst' },
-    { method: 'get',  path: "router.get('/'",  endpoint: '`/api/records`', ctrl: '`record.controller.js → getAllRecords()`', auth: '✅ JWT', roles: 'Any authenticated' },
-    { method: 'get',  path: "router.get('/:id'", endpoint: '`/api/records/:id`', ctrl: '`record.controller.js → getRecordById()`', auth: '✅ JWT', roles: 'Any authenticated' },
-    { method: 'put',  path: "router.put('/:id'", endpoint: '`/api/records/:id`', ctrl: '`record.controller.js → updateRecord()`', auth: '✅ JWT', roles: 'Admin, Analyst' },
+    { method: 'post',   path: "router.post('/'",    endpoint: '`/api/records`',     ctrl: '`record.controller.js → createRecord()`',  auth: '✅ JWT', roles: 'Admin, Analyst' },
+    { method: 'get',    path: "router.get('/'",     endpoint: '`/api/records`',     ctrl: '`record.controller.js → getAllRecords()`',  auth: '✅ JWT', roles: 'Any authenticated' },
+    { method: 'get',    path: "router.get('/:id'",  endpoint: '`/api/records/:id`', ctrl: '`record.controller.js → getRecordById()`', auth: '✅ JWT', roles: 'Any authenticated' },
+    { method: 'put',    path: "router.put('/:id'",  endpoint: '`/api/records/:id`', ctrl: '`record.controller.js → updateRecord()`',  auth: '✅ JWT', roles: 'Admin, Analyst' },
     { method: 'delete', path: "router.delete('/:id'", endpoint: '`/api/records/:id`', ctrl: '`record.controller.js → deleteRecord()`', auth: '✅ JWT', roles: 'Admin only' },
   ];
   for (const r of recordMethodMap) {
-    if (routeExists(recordRoutes.toLowerCase(), r.path.toLowerCase())) {
+    if (routeExists(recordRoutesNormLC, r.path.toLowerCase())) {
       rows.records.push(`| ${r.method.toUpperCase()} | ${r.endpoint} | \`record.routes.js\` | ${r.ctrl} | ${r.auth} | ${r.roles} |`);
     }
   }
