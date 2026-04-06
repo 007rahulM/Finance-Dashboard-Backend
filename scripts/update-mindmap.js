@@ -86,15 +86,25 @@ function generateEndpointsSection() {
     users: [],
   };
 
+  // Helper: check if a route method+path combination exists in source (handles multi-line patterns)
+  function routeExists(source, pathPattern) {
+    // Normalize source by collapsing whitespace between the method call and the path
+    const normalized = source.replace(/\(\s*\n\s*/g, '(');
+    const single = pathPattern;
+    const double = pathPattern.replace(/'/g, '"');
+    return normalized.includes(single) || normalized.includes(double);
+  }
+
   // Parse auth routes
-  if (authRoutes.includes("router.post('/register'") || authRoutes.includes('router.post("/register"')) {
-    rows.auth.push('| POST | `/api/auth/register` | `auth.routes.js` | `auth.controller.js → register()` | ❌ | Public |');
-  }
-  if (authRoutes.includes("router.post('/login'") || authRoutes.includes('router.post("/login"')) {
-    rows.auth.push('| POST | `/api/auth/login` | `auth.routes.js` | `auth.controller.js → login()` | ❌ | Public |');
-  }
-  if (authRoutes.includes("router.get('/profile'") || authRoutes.includes('router.get("/profile"')) {
-    rows.auth.push('| GET | `/api/auth/profile` | `auth.routes.js` | `auth.controller.js → getProfile()` | ✅ JWT | Any authenticated |');
+  const authRouteDefs = [
+    { pattern: "router.post('/register'", row: '| POST | `/api/auth/register` | `auth.routes.js` | `auth.controller.js → register()` | ❌ | Public |' },
+    { pattern: "router.post('/login'",    row: '| POST | `/api/auth/login` | `auth.routes.js` | `auth.controller.js → login()` | ❌ | Public |' },
+    { pattern: "router.get('/profile'",   row: '| GET | `/api/auth/profile` | `auth.routes.js` | `auth.controller.js → getProfile()` | ✅ JWT | Any authenticated |' },
+  ];
+  for (const def of authRouteDefs) {
+    if (routeExists(authRoutes, def.pattern)) {
+      rows.auth.push(def.row);
+    }
   }
 
   // Parse record routes
@@ -106,11 +116,7 @@ function generateEndpointsSection() {
     { method: 'delete', path: "router.delete('/:id'", endpoint: '`/api/records/:id`', ctrl: '`record.controller.js → deleteRecord()`', auth: '✅ JWT', roles: 'Admin only' },
   ];
   for (const r of recordMethodMap) {
-    if (recordRoutes.toLowerCase().includes(r.path.toLowerCase()) ||
-        recordRoutes.toLowerCase().includes(r.path.replace("'", '"').toLowerCase())) {
-      rows.records.push(`| ${r.method.toUpperCase()} | ${r.endpoint} | \`record.routes.js\` | ${r.ctrl} | ${r.auth} | ${r.roles} |`);
-    } else {
-      // Fallback: always include standard CRUD rows from known API
+    if (routeExists(recordRoutes.toLowerCase(), r.path.toLowerCase())) {
       rows.records.push(`| ${r.method.toUpperCase()} | ${r.endpoint} | \`record.routes.js\` | ${r.ctrl} | ${r.auth} | ${r.roles} |`);
     }
   }

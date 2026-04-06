@@ -110,6 +110,8 @@ flowchart TD
 
 | Method | Endpoint | Route File | Controller | Auth Required | Roles |
 |--------|----------|-----------|------------|:-------------:|-------|
+| POST | `/api/auth/register` | `auth.routes.js` | `auth.controller.js → register()` | ❌ | Public |
+| POST | `/api/auth/login` | `auth.routes.js` | `auth.controller.js → login()` | ❌ | Public |
 | GET | `/api/auth/profile` | `auth.routes.js` | `auth.controller.js → getProfile()` | ✅ JWT | Any authenticated |
 
 ### Financial Record Endpoints (`/api/records`)
