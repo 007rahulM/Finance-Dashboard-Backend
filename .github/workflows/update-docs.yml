@@ -1,0 +1,49 @@
+name: Update Docs (Mindmap)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'server.js'
+      - 'package.json'
+  workflow_dispatch:
+  schedule:
+    # Runs at 02:00 UTC every Monday
+    - cron: '0 2 * * 1'
+
+jobs:
+  update-mindmap:
+    name: Regenerate mindmap.md sections
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run update-mindmap script
+        run: node scripts/update-mindmap.js
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet mindmap.md || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push updated mindmap.md
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add mindmap.md
+          git commit -m "docs: auto-update mindmap.md [skip ci]"
+          git push
