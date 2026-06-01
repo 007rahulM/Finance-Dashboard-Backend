@@ -1,7 +1,7 @@
 # Finance Dashboard Backend — Mindmap
 
 <!-- AUTO-UPDATE: mindmap -->
-<!-- Generated: 2026-05-25 | Repo: 007rahulM/Finance-Dashboard-Backend -->
+<!-- Generated: 2026-06-01 | Repo: 007rahulM/Finance-Dashboard-Backend -->
 
 ---
 
@@ -659,4 +659,4 @@ journey
 
 ---
 
-*Last updated: 2026-05-25 | Auto-update enabled via `.github/workflows/update-docs.yml`*
+*Last updated: 2026-06-01 | Auto-update enabled via `.github/workflows/update-docs.yml`*
